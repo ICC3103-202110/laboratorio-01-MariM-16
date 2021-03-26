@@ -88,6 +88,7 @@ def verification(choic1, choic2,n1,n2):
         y=choic2[1]
         tab[x][y]=" "
         boardfinish[x][y]=" "
+        print("\nSI SON PARES\n")
     elif n1!=n2:
         x=choic1[0]
         y=choic1[1]
@@ -95,53 +96,71 @@ def verification(choic1, choic2,n1,n2):
         x=choic2[0]
         y=choic2[1]
         tab[x][y]="*"
-        print("NO SON PARES")
+        print("\nNO SON PARES\n")
        
     return tab, boardfinish
 
+def winer (score_j1,score_j2):
+    if score_j1>score_j2:
+        print ("EL GANADOR ES EL JUGADOR 1, y su puntaje es: ", score_j1,"\n")
+    elif score_j1<score_j2:
+        print("\nEL GANADOR ES EL JUGADOR 2, y su puntaje es: ", score_j2,"\n")
+    elif score_j1==score_j2:
+        print("\nEMPATE\n")
+    return print("FIN")
 
+i=1
 while len(boardfinish)!=0:
-    i=1
-    def game(i,tab, boardfinish,score_j1,score_j2):
-        print("\nJUGADOR",i,"\n")
-        print('El tablero se mostrará a continuación como: (carta - coordenada)')
-        print(tabulate(tab),"\n")
-        print("Ingrese la coordenada de la carta que desea ver en formato: 0,1 ")
-        coordinates1=input()
-        choic1=Choice(coordinates1)
-        res1,n1=revelation(choic1)
-        print(tabulate(res1))
-        print("Ingrese la coordenada de la carta que desea ver en formato: 0,1 ")
-        coordinates2=input()
-        choic2=Choice(coordinates2)
-        res2,n2=revelation(choic2)
-        if i==1:
-            if n1!=n2:
-                i=2
-            elif n1==n2:
-                i=1
-                score_j1+=1
-        elif i!=1:
-            if n1!=n2:
-                i=1
-            elif n1==n2:
-                i=2
-                score_j2+=1
-        print(tabulate(res2))
-        
-        
-        
-        tab,boardfinish=verification(choic1, choic2, n1, n2)
-        
     
-        
-        return "gana"
-    
-    juego=game(i,tab, boardfinish,score_j1,score_j2)
-    
-   
 
+        
+
+    print("\n*** TURNO JUGADOR",i,"***\n")
+    print('El tablero se mostrará a continuación como: (carta - coordenada)')
+    print(tabulate(tab),"\n")
+    print("Ingrese la coordenada de la carta que desea ver en formato: 0,1 ")
+    coordinates1=input()
+    choic1=Choice(coordinates1)
+    res1,n1=revelation(choic1)
+    print(tabulate(res1))
+    print("\nIngrese la coordenada de la carta que desea ver en formato: 0,1 ")
+    coordinates2=input()
+    choic2=Choice(coordinates2)
+    res2,n2=revelation(choic2)
+   
+    if i==1:
+        if n1!=n2:
+            i=2
+          
+        elif n1==n2:
+            
+            i=1
+            score_j1+=1
+        else:
+            i=2
+    else:
+        
+        if n1!=n2:
+            
+            i=1
+        elif n1==n2:
+            i=2
+            
+            score_j2+=1
+        
+   
+    print(tabulate(res2))
+    print ("\n*** PUNTAJES ***\n")
+    print("JUGADOR 1: ", score_j1)
+    print("\nJUGADOR 2: ", score_j2)
     
+    tab,boardfinish=verification(choic1, choic2, n1, n2)
+    if score_j1+score_j2==num_cards:
+        print ("*** TERMINÓ EL JUEGO ***")
+        finish=winer(score_j1,score_j2)
+        print (finish)
+        break
+   
     
     
     
